@@ -8,7 +8,9 @@ public class PSQLConnect {
     private final String url = "jdbc:postgresql://localhost:5432/stackoverflow";
     private final String user = "postgres";
 
-    private final String password = "";
+
+    private final String password = System.getenv("DB_PASS");
+
 
 
     public Connection connect() {
