@@ -1,6 +1,8 @@
 package com.codecool.stackoverflowtw.dao;
 
+import com.codecool.stackoverflowtw.controller.dto.AnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
+import com.codecool.stackoverflowtw.dao.model.Question;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
 import java.sql.*;
@@ -88,7 +90,7 @@ public class AnswerDaoJdbc implements AnswerDao{
     }
 
     @Override
-    public int add(Answer answer) {
+    public int add(AnswerDTO answer) {
         String sql = "INSERT INTO answers(description, question_id, user_id) VALUES (?,?,?)";
         Connection connection = psqlConnect.connect();
 
@@ -99,7 +101,7 @@ public class AnswerDaoJdbc implements AnswerDao{
             preparedStatement.setInt(3,answer.user_id());
             preparedStatement.executeUpdate();
             System.out.println("answer added");
-            return answer.answer_id();
+            return answer.id();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
