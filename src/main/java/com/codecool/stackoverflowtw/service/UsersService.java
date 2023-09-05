@@ -27,9 +27,9 @@ public class UsersService {
         // TODO
         return false;
     }
-    public int addNewUser(newUserDTO user) {
-        // TODO
-        int createdId = 0;
+    public int addNewUser(int id, String user_name, String password) {
+        usersDaoJdbc.addUser(new UserDTO(id, user_name, password));
+        int createdId = id;
         return createdId;
     }
 }
