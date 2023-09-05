@@ -7,7 +7,9 @@ import java.sql.SQLException;
 public class PSQLConnect {
     private final String url = "jdbc:postgresql://localhost:5432/stackoverflow";
     private final String user = "postgres";
+
     private final String password = "postgres123";
+
 
     public Connection connect() {
         Connection conn = null;
