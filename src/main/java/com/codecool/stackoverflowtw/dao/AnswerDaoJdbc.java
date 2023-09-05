@@ -89,6 +89,21 @@ public class AnswerDaoJdbc implements AnswerDao{
 
     @Override
     public int add(Answer answer) {
+        String sql = "INSERT INTO answers(description, question_id, user_id) VALUES (?,?,?)";
+        Connection connection = psqlConnect.connect();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, answer.description());
+            preparedStatement.setInt(2,answer.question_id());
+            preparedStatement.setInt(3,answer.user_id());
+            preparedStatement.executeUpdate();
+            System.out.println("answer added");
+            return answer.answer_id();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         return 0;
     }
 }
