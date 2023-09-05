@@ -2,6 +2,7 @@ package com.codecool.stackoverflowtw.service;
 import com.codecool.stackoverflowtw.controller.dto.UserDTO;
 import com.codecool.stackoverflowtw.controller.dto.newUserDTO;
 import com.codecool.stackoverflowtw.dao.QuestionsDAO;
+import com.codecool.stackoverflowtw.dao.UserDaoJdbc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +10,10 @@ import java.util.List;
 
 @Service
 public class UsersService {
-    private QuestionsDAO questionsDAO;
+    private UserDaoJdbc userDaoJdbc;
     @Autowired
-    public UsersService(QuestionsDAO questionsDAO) {
-        this.questionsDAO = questionsDAO;
+    public UsersService(UserDaoJdbc userDaoJdbc) {
+        this.userDaoJdbc = userDaoJdbc;
     }
     public List<UserDTO> getAllUsers() {
         // TODO
@@ -20,7 +21,7 @@ public class UsersService {
     }
     public UserDTO getUserById(int id) {
         // TODO
-        questionsDAO.sayHi();
+
         return new UserDTO(id, "example user", "example pw");
     }
     public boolean deleteUsersById(int id) {
