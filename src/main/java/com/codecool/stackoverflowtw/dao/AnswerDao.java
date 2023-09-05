@@ -9,5 +9,5 @@ public interface AnswerDao {
     List<Answer> getAll(int questionId);
     Answer getById(int id);
     int deleteById(int id);
-    Answer add(Answer answer);
+    int add(Answer answer);
 }
