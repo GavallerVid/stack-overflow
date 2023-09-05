@@ -3,10 +3,12 @@ package com.codecool.stackoverflowtw.service;
 import com.codecool.stackoverflowtw.dao.QuestionsDAO;
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
+import com.codecool.stackoverflowtw.dao.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,8 +22,17 @@ public class QuestionService {
     }
 
     public List<QuestionDTO> getAllQuestions() {
-        // TODO
-        return List.of(new QuestionDTO(1, "example title", "example desc", LocalDateTime.now()));
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        List<Question> questionsFromDB = questionsDAO.getAllQuestions();
+
+        for (Question question : questionsFromDB) {
+            int id = question.question_id();
+            String description = question.description();
+
+            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now()));
+        }
+
+        return questionDTOS;
     }
 
     public QuestionDTO getQuestionById(int id) {
