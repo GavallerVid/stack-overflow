@@ -16,7 +16,7 @@ public class UsersDaoJdbc implements UsersDAO {
 
     @Override
     public boolean addUser(UserDTO userDTO) {
-        String sql = "INSERT INTO users(name, user_name, password) VALUES(?,?,?)";
+        String sql = "INSERT INTO users(user_name, password) VALUES(?,?)";
         Connection connection = psqlConnect.connect();
 
         try {
