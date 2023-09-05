@@ -3,7 +3,6 @@ package com.codecool.stackoverflowtw.service;
 import com.codecool.stackoverflowtw.dao.UsersDaoJdbc;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
