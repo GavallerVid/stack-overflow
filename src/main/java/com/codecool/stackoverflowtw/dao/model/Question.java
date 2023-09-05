@@ -1,4 +1,4 @@
 package com.codecool.stackoverflowtw.dao.model;
 
-public class Question {
+public record Question (int question_id, String description, int user_id){
 }
