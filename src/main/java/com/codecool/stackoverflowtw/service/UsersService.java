@@ -2,9 +2,11 @@ package com.codecool.stackoverflowtw.service;
 import com.codecool.stackoverflowtw.controller.dto.UserDTO;
 import com.codecool.stackoverflowtw.controller.dto.newUserDTO;
 import com.codecool.stackoverflowtw.dao.UsersDaoJdbc;
+import com.codecool.stackoverflowtw.dao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,8 +17,14 @@ public class UsersService {
         this.usersDaoJdbc = usersDaoJdbc;
     }
     public List<UserDTO> getAllUsers() {
-        // TODO
-        return List.of(new UserDTO(1, "example user", "example pw"));
+        List<UserDTO> userDTOS = new ArrayList<>();
+        for (User user: usersDaoJdbc.getAllUsers()) {
+            int id = user.user_id();
+            String username = user.user_name();
+            String pw = user.password();
+            userDTOS.add(new UserDTO(id, username,pw));
+        }
+        return userDTOS;
     }
     public UserDTO getUserById(int id) {
         // TODO
