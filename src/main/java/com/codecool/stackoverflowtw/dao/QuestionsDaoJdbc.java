@@ -1,11 +1,10 @@
 package com.codecool.stackoverflowtw.dao;
 
+import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
 import com.codecool.stackoverflowtw.dao.model.Question;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,4 +55,22 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
         return questions;
     }
+
+    @Override
+    public boolean addQuestion(QuestionDTO questionDTO) {
+        String sql = "INSERT INTO questions(description ,user_id) VALUES (?,?)";
+        Connection connection = psqlConnect.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, questionDTO.description());
+            preparedStatement.setInt(2, questionDTO.user_id());
+            preparedStatement.executeUpdate();
+            System.out.println("question added");
+            return true;
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
 }

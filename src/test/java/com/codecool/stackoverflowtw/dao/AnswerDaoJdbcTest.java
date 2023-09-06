@@ -25,6 +25,8 @@ class AnswerDaoJdbcTest {
     void add() {
         PSQLConnect psqlConnect = new PSQLConnect();
         AnswerDaoJdbc answerDaoJdbc = new AnswerDaoJdbc(psqlConnect);
+        QuestionsDaoJdbc questionsDaoJdbc = new QuestionsDaoJdbc(psqlConnect);
+
         AnswerDTO answerDTO = new AnswerDTO(1,"answer to random question", 4, 10);
         assertEquals(1, answerDaoJdbc.add(answerDTO));
     }
