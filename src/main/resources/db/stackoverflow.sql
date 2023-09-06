@@ -25,7 +25,7 @@ CREATE TABLE answers
     description text,
     question_id serial NOT NULL,
     foreign key (question_id)
-        references questions (question_id),
+        references questions (question_id) ON DELETE CASCADE,
     user_id serial NOT NULL,
     foreign key (user_id)
         references users (user_id)
