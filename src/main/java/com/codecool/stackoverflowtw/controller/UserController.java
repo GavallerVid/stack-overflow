@@ -31,8 +31,8 @@ import java.util.List;
         }
 
         @PostMapping("/")
-        public int addNewUser(@RequestBody newUserDTO question) {
-            return 0;
+        public int addNewUser(@RequestBody newUserDTO newUserDTO) {
+            return usersService.addNewUser(newUserDTO.username(),newUserDTO.password());
         }
 
         @DeleteMapping("/{id}")

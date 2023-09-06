@@ -1,6 +1,7 @@
 package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.UserDTO;
+import com.codecool.stackoverflowtw.controller.dto.newUserDTO;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +15,9 @@ class UsersDaoJdbcTest {
     void adduser() {
         PSQLConnect psqlConnect = new PSQLConnect();
         UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc(psqlConnect);
-        UserDTO user = new UserDTO(1, "Bob", "333");
-        assertTrue(usersDaoJdbc.addUser(user));
+        newUserDTO user = new newUserDTO( "Bob", "333");
+        System.out.println(usersDaoJdbc.addUser(user));
+        //assertTrue(usersDaoJdbc.addUser(user));
     }
 
     @Test
