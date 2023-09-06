@@ -33,21 +33,22 @@ public class UsersDaoJdbc implements UsersDAO {
 
         return false;
     }
+
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users;";
-        try{
+        try {
             Connection connection = psqlConnect.connect();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-                System.out.println("conn!");
+            System.out.println("conn!");
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int user_id = resultSet.getInt("user_id");
                 String user_name = resultSet.getString("user_name");
                 String password = resultSet.getString("password");
-                users.add(new User(user_id,user_name,password));
+                users.add(new User(user_id, user_name, password));
                 System.out.printf("QID: %d, Description: %s, UID: %s", user_id, user_name, password);
 
                 System.out.println();
@@ -55,7 +56,7 @@ public class UsersDaoJdbc implements UsersDAO {
             resultSet.close();
             statement.close();
             connection.close();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return users;
@@ -63,7 +64,26 @@ public class UsersDaoJdbc implements UsersDAO {
 
     @Override
     public UserDTO getUserById(int id) {
-        return null;
+        System.out.println(id + "IDD");
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        int user_id = 0;
+        String username = "";
+        String password = "";
+        try {
+            Connection connection = psqlConnect.connect();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                user_id = rs.getInt("user_id");
+                username = rs.getString("user_name");
+                password = rs.getString("password");
+            }
+            connection.close();
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return new UserDTO(user_id, username, password);
     }
 
     @Override

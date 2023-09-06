@@ -27,9 +27,9 @@ public class UsersService {
         return userDTOS;
     }
     public UserDTO getUserById(int id) {
-        // TODO
+        UserDTO user = usersDaoJdbc.getUserById(id);
 
-        return new UserDTO(id, "example user", "example pw");
+        return user;
     }
     public boolean deleteUsersById(int id) {
         // TODO
