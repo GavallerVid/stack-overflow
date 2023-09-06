@@ -28,22 +28,28 @@ public class QuestionService {
         for (Question question : questionsFromDB) {
             int id = question.question_id();
             String description = question.description();
-
-            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now()));
+            int user_id = question.user_id();
+            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now(), user_id));
         }
 
         return questionDTOS;
     }
 
     public QuestionDTO getQuestionById(int id) {
-        // TODO
-        questionsDAO.sayHi();
-        return new QuestionDTO(id, "example title", "example desc", LocalDateTime.now());
+
+        List<Question> questionsFromDB = questionsDAO.getAllQuestions();
+        for (Question question : questionsFromDB) {
+            if (question.question_id() == id) {
+                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now(), question.user_id());
+            }
+        }
+        return null;
     }
 
     public boolean deleteQuestionById(int id) {
-        // TODO
-        return false;
+        int deletedRows = questionsDAO.deleteQuestionById(id);
+        System.out.println(deletedRows);
+        return deletedRows == 1;
     }
 
     public int addNewQuestion(NewQuestionDTO question) {
