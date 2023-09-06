@@ -31,6 +31,6 @@ public class AnswerController {
 
     @DeleteMapping("/{id}")
     public boolean deleteAnswerById(@PathVariable int id) {
-        return answerService.deleteQuestionById(id);
+        return answerService.deleteAnswerById(id);
     }
 }
