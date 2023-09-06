@@ -27,7 +27,7 @@ import java.util.List;
 
         @GetMapping("/{id}")
         public UserDTO getUserById(@PathVariable int id) {
-            return null;
+            return usersService.getUserById(id);
         }
 
         @PostMapping("/")
