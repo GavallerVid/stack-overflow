@@ -28,8 +28,8 @@ public class QuestionService {
         for (Question question : questionsFromDB) {
             int id = question.question_id();
             String description = question.description();
-
-            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now()));
+            int user_id = question.user_id();
+            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now(), user_id));
         }
 
         return questionDTOS;
@@ -38,7 +38,7 @@ public class QuestionService {
     public QuestionDTO getQuestionById(int id) {
         // TODO
         questionsDAO.sayHi();
-        return new QuestionDTO(id, "example title", "example desc", LocalDateTime.now());
+        return new QuestionDTO(id, "example title", "example desc", LocalDateTime.now(), 1);
     }
 
     public boolean deleteQuestionById(int id) {
