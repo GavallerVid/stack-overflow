@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS questions;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS answers CASCADE;
 
 CREATE TABLE users
 (
@@ -12,6 +12,7 @@ CREATE TABLE users
 CREATE TABLE questions
 (
     question_id serial primary key,
+    title text,
     description text,
     user_id serial NOT NULL,
     foreign key (user_id)

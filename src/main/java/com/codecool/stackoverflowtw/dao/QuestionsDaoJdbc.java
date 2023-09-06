@@ -1,6 +1,10 @@
 package com.codecool.stackoverflowtw.dao;
 
+
 import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
+
+import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
+
 import com.codecool.stackoverflowtw.dao.model.Question;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
@@ -33,7 +37,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
             statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 int question_id = rs.getInt("question_id");
                 String description = rs.getString("description");
                 int user_id = rs.getInt("user_id");
@@ -57,6 +61,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     }
 
     @Override
+
     public boolean addQuestion(QuestionDTO questionDTO) {
         String sql = "INSERT INTO questions(description ,user_id) VALUES (?,?)";
         Connection connection = psqlConnect.connect();
@@ -73,4 +78,25 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
         return false;
     }
 
+
+    public int deleteQuestionById(int id) {
+
+        String SQL = "DELETE FROM questions WHERE question_id = ?";
+
+        int affectedrows = 0;
+
+        try (Connection conn = psqlConnect.connect();
+             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+
+            pstmt.setInt(1, id);
+
+            affectedrows = pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return affectedrows;
+    }
+
+   
 }
