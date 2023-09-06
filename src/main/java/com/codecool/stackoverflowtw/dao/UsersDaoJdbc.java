@@ -1,6 +1,7 @@
 package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.UserDTO;
+import com.codecool.stackoverflowtw.controller.dto.newUserDTO;
 import com.codecool.stackoverflowtw.dao.model.User;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
@@ -16,22 +17,24 @@ public class UsersDaoJdbc implements UsersDAO {
     }
 
     @Override
-    public boolean addUser(UserDTO userDTO) {
+    public int addUser(newUserDTO newUserDTO) {
         String sql = "INSERT INTO users(user_name, password) VALUES(?,?)";
         Connection connection = psqlConnect.connect();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, userDTO.user_name());
-            preparedStatement.setString(2, userDTO.password());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, newUserDTO.username());
+            preparedStatement.setString(2, newUserDTO.password());
             preparedStatement.executeUpdate();
             System.out.println("user added");
-            return true;
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        return false;
+        return 0;
     }
 
     @Override
@@ -72,7 +75,7 @@ public class UsersDaoJdbc implements UsersDAO {
         try {
             Connection connection = psqlConnect.connect();
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,id);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 user_id = rs.getInt("user_id");
