@@ -2,14 +2,12 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.AnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
-import com.codecool.stackoverflowtw.dao.model.Question;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.List;
 
 public class AnswerDaoJdbc implements AnswerDao{
 
@@ -20,21 +18,22 @@ public class AnswerDaoJdbc implements AnswerDao{
     }
 
     @Override
-    public List<Answer> getAll(int questionId) {
-        String SQL = "SELECT answer_id, description FROM answers";
+    public List<Answer> getAllAnswerByQuestionId(int questionId) {
+        String SQL = "SELECT answer_id, description, question_id, user_id FROM answers WHERE question_id = ?";
         List<Answer> answers = new ArrayList<>();
 
         try (Connection conn = psqlConnect.connect();
              PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
+            pstmt.setInt(1, questionId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Integer answer_id = rs.getInt("answer_id");
+                int answer_id = rs.getInt("answer_id");
                 String description = rs.getString("description");
-                Integer question_id = rs.getInt("question_id");
-                Integer user_id = rs.getInt("user_id");
-                answers.add(new Answer(answer_id, description,question_id,user_id));
+                int question_id = rs.getInt("question_id");
+                int user_id = rs.getInt("user_id");
+                answers.add(new Answer(answer_id, description, question_id, user_id));
             }
 
         } catch (SQLException e) {
@@ -57,10 +56,10 @@ public class AnswerDaoJdbc implements AnswerDao{
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Integer answer_id = rs.getInt("answer_id");
+                int answer_id = rs.getInt("answer_id");
                 String description = rs.getString("description");
-                Integer question_id = rs.getInt("question_id");
-                Integer user_id = rs.getInt("user_id");
+                int question_id = rs.getInt("question_id");
+                int user_id = rs.getInt("user_id");
                 answer = new Answer(answer_id, description,question_id,user_id);
             }
 
