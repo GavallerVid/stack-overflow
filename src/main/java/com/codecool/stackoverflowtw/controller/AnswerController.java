@@ -1,10 +1,8 @@
 package com.codecool.stackoverflowtw.controller;
 
+import com.codecool.stackoverflowtw.controller.dto.AnswerDTO;
 import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
-import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
-import com.codecool.stackoverflowtw.dao.AnswerDao;
 import com.codecool.stackoverflowtw.service.AnswerService;
-import com.codecool.stackoverflowtw.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +24,13 @@ public class AnswerController {
         return 0;
     }
 
-    @GetMapping("/all/{question}")
-    public List<AnswerDao> getAllAnswerByQuestionId(int questionId) {
-        return answerService.getAllAnswerByQuestionId(int questionId);
+    @GetMapping("/{questionId}")
+    public List<AnswerDTO> getAllAnswerByQuestionId(@PathVariable int questionId) {
+        return answerService.getAllAnswerByQuestionId(questionId);
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteAnswerById(@PathVariable int id) {
-        return answerService.deleteQuestionById(id);
+        return answerService.deleteAnswerById(id);
     }
 }

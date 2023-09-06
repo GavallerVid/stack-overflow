@@ -1,8 +1,6 @@
 package com.codecool.stackoverflowtw.dao;
 
 
-import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
-
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 
 import com.codecool.stackoverflowtw.dao.model.Question;
@@ -39,10 +37,11 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
             while (rs.next()) {
                 int question_id = rs.getInt("question_id");
+                String title = rs.getString("title");
                 String description = rs.getString("description");
                 int user_id = rs.getInt("user_id");
 
-                questions.add(new Question(question_id, description, user_id));
+                questions.add(new Question(question_id, title, description, user_id));
 
                 System.out.printf("QID: %d, Description: %s, UID: %d", question_id, description, user_id);
 
