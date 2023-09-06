@@ -65,7 +65,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
         String sql = "INSERT INTO questions(title, description ,user_id) VALUES (?,?,?)";
         Connection connection = psqlConnect.connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, newQuestionDTO.title());
             preparedStatement.setString(2, newQuestionDTO.description());
             preparedStatement.setInt(3, newQuestionDTO.user_id());
