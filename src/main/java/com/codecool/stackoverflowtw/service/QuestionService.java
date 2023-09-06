@@ -53,8 +53,6 @@ public class QuestionService {
     }
 
     public int addNewQuestion(NewQuestionDTO question) {
-        // TODO
-        int createdId = 0;
-        return createdId;
+        return questionsDAO.addQuestion(question);
     }
 }
