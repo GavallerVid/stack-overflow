@@ -37,14 +37,10 @@ public class QuestionService {
 
     public QuestionDTO getQuestionById(int id) {
 
-        // TODO
-        questionsDAO.sayHi();
-        return new QuestionDTO(id, "example title", "example desc", LocalDateTime.now(), 1);
-
         List<Question> questionsFromDB = questionsDAO.getAllQuestions();
         for (Question question : questionsFromDB) {
             if (question.question_id() == id) {
-                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now());
+                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now(), question.user_id());
             }
         }
         return null;

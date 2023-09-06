@@ -17,6 +17,5 @@ public interface QuestionsDAO {
 
     int deleteQuestionById(int id);
 
-    int addNewQuestion (NewQuestionDTO newQuestionDTO);
 
 }

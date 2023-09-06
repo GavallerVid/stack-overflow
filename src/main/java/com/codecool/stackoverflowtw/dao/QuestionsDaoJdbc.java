@@ -61,7 +61,6 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     }
 
     @Override
-
     public boolean addQuestion(QuestionDTO questionDTO) {
         String sql = "INSERT INTO questions(description ,user_id) VALUES (?,?)";
         Connection connection = psqlConnect.connect();
