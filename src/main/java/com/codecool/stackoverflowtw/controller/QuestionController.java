@@ -29,8 +29,8 @@ public class QuestionController {
     }
 
     @PostMapping("/")
-    public int addNewQuestion(@RequestBody NewQuestionDTO question) {
-        return 0;
+    public int addNewQuestion(@RequestBody NewQuestionDTO newQuestionDTO) {
+        return questionService.addNewQuestion(newQuestionDTO);
     }
 
     @DeleteMapping("/{id}")
