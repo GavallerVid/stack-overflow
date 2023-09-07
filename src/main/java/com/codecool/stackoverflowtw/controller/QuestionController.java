@@ -2,14 +2,16 @@ package com.codecool.stackoverflowtw.controller;
 
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
+import com.codecool.stackoverflowtw.controller.dto.UpdateQuestionDTO;
 import com.codecool.stackoverflowtw.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("questions")
+@RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
 
@@ -31,6 +33,18 @@ public class QuestionController {
     @PostMapping("/")
     public int addNewQuestion(@RequestBody NewQuestionDTO newQuestionDTO) {
         return questionService.addNewQuestion(newQuestionDTO);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateQuestion(
+            @PathVariable int id,
+            @RequestBody UpdateQuestionDTO updateQuestionDTO) {
+        boolean updated = questionService.updateQuestion(id, updateQuestionDTO);
+
+        if (updated) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")

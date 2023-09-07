@@ -3,6 +3,7 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 
+import com.codecool.stackoverflowtw.controller.dto.UpdateQuestionDTO;
 import com.codecool.stackoverflowtw.dao.model.Question;
 import com.codecool.stackoverflowtw.service.PSQLConnect;
 
@@ -98,6 +99,23 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
             System.out.println(ex.getMessage());
         }
         return affectedrows;
+    }
+
+    @Override
+    public int updateQuestion(int id, UpdateQuestionDTO updateQuestionDTO) {
+        String sql = "UPDATE questions SET title=?, description=? WHERE question_id=?";
+        Connection connection = psqlConnect.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, updateQuestionDTO.title());
+            preparedStatement.setString(2, updateQuestionDTO.description());
+            preparedStatement.setInt(3, id);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 
 

@@ -1,5 +1,6 @@
 package com.codecool.stackoverflowtw.service;
 
+import com.codecool.stackoverflowtw.controller.dto.UpdateQuestionDTO;
 import com.codecool.stackoverflowtw.dao.QuestionsDAO;
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
@@ -50,5 +51,9 @@ public class QuestionService {
 
     public int addNewQuestion(NewQuestionDTO question) {
         return questionsDAO.addQuestion(question);
+    }
+    public boolean updateQuestion(int id, UpdateQuestionDTO updateQuestionDTO) {
+        int updatedRows = questionsDAO.updateQuestion(id, updateQuestionDTO);
+        return updatedRows == 1;
     }
 }
