@@ -1,5 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Button, Form} from "react-bootstrap";
+import "./NewQuestionForm.css"
 
 export default function NewQuestionForm() {
     const navigate = useNavigate()
@@ -16,16 +18,18 @@ export default function NewQuestionForm() {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(title + " " +description)
+        console.log(title + " " + description)
         const newQuestion = {
             title: title,
-            description: description, user_id: loggedInUserId}
+            description: description, user_id: loggedInUserId
+        }
         postQuestion(newQuestion)
     }
-    async function postQuestion (newQuestion) {
+
+    async function postQuestion(newQuestion) {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newQuestion)
         };
         fetch('/questions/', requestOptions)
@@ -34,17 +38,21 @@ export default function NewQuestionForm() {
     }
 
     return (
-        <div id={"formContainer"}>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="question-title">Question Title:</label>
-                <input type="text" id={"questionTitle"} name={"questionTitle"}
-                       defaultValue={title} onChange={handleQuestionTitleChange}/>
-                <label htmlFor="question-description">Question:</label>
-                <input type="text" id={"questionDescription"} name={"questionDescription"}
-                       defaultValue={description}
-                       onChange={handleQuestionDescriptionChange}/>
-                <button type={"submit"}>Submit</button>
-            </form>
+        <div className="formContainer" id={"formContainer"}>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                    <Form.Label htmlFor="question-title">Question Title: </Form.Label>
+                    <Form.Control type="text" id={"questionTitle"} name={"questionTitle"}
+                                  defaultValue={title} onChange={handleQuestionTitleChange}/>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label htmlFor="question-description">Question description: </Form.Label>
+                    <Form.Control as="textarea" rows="5" type="text" id={"questionDescription"} name={"questionDescription"}
+                                  defaultValue={description}
+                                  onChange={handleQuestionDescriptionChange}/>
+                </Form.Group>
+                <Button type={"submit"}>Submit</Button>
+            </Form>
         </div>
     )
 }
