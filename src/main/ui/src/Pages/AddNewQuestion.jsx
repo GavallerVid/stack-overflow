@@ -1,13 +1,14 @@
-
+import "./AddNewQuestion.css"
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 export default function addNewQuestion(){
     return (
-        <div id={"addNewQuestionButtonContainer"}>
+        <div className="button-container" id={"addNewQuestionButtonContainer"}>
                 <Link to={"/add-new-question"}>
-                    <button id={"addButton"}>
+                    <Button id={"addButton"}>
                         Add New Question
-                    </button>
+                    </Button>
                 </Link>
         </div>
     )
