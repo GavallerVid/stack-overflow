@@ -3,11 +3,15 @@ VALUES (1,'name','pass');
 
 
 INSERT INTO questions
-VALUES (1,'title1','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem elit, blandit non ipsum ultrices, bibendum dignissim diam. Fusce dapibus ante consequat ultricies elementum. Donec volutpat sem tellus, quis malesuada dui porttitor nec. Aenean vitae ipsum vel turpis ullamcorper ultricies. Sed sed tempor neque, ut condimentum neque. Praesent quis erat id dui sagittis dictum. Morbi tristique leo ex, ac venenatis felis cursus in. Sed lobortis tempus bibendum. Etiam tristique auctor varius. Curabitur condimentum consectetur dapibus. Vestibulum vehicula, lorem vel congue malesuada, purus dui laoreet nulla, et ultricies purus nisi sed est. Nulla vel porta tellus, ac consectetur magna. Integer ut risus et lectus sollicitudin mollis sed sed urna.', 1);
+VALUES (1,'What are enums and why are they useful?','Today I was browsing through some questions on this site and I found a mention of an enum being used in singleton pattern about purported thread-safety benefits to such solution.
+I have never used enums and I have been programming in Java for more than a couple of years now. And apparently, they changed a lot. Now they even do full-blown support of OOP within themselves. Now why and what should I use enum in day to day programming?', 1);
 
 INSERT INTO questions
-VALUES (2,'title2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem elit, blandit non ipsum ultrices, bibendum dignissim diam. Fusce dapibus ante consequat ultricies elementum. Donec volutpat sem tellus, quis malesuada dui porttitor nec. Aenean vitae ipsum vel turpis ullamcorper ultricies. Sed sed tempor neque, ut condimentum neque. Praesent quis erat id dui sagittis dictum. Morbi tristique leo ex, ac venenatis felis cursus in. Sed lobortis tempus bibendum. Etiam tristique auctor varius. Curabitur condimentum consectetur dapibus. Vestibulum vehicula, lorem vel congue malesuada, purus dui laoreet nulla, et ultricies purus nisi sed est. Nulla vel porta tellus, ac consectetur magna. Integer ut risus et lectus sollicitudin mollis sed sed urna.', 1);
+VALUES (2,'Static Classes In Java', 'Is there anything like static class in Java?
+What is the meaning of such a class? Do all the methods of the static class need to be static too?
+Is it required the other way round as well? That if a class contains only static methods, the class shall be static too?
+What are static classes good for?', 1);
 
 INSERT INTO answers
-VALUES (1, 'random', 1, 1);
+VALUES (1, 'Enumerations offer an easy way to work with sets of related constants. An enumeration, or Enum , is a symbolic name for a set of values. Enumerations are treated as data types, and you can use them to create sets of constants for use with variables and properties.', 1, 1);
 

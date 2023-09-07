@@ -36,7 +36,7 @@ public class QuestionService {
         List<Question> questionsFromDB = questionsDAO.getAllQuestionsWithAnswerCount();
         for (Question question : questionsFromDB) {
             if (question.question_id() == id) {
-                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now(), question.user_id(), question.answerCount());
+                return new QuestionDTO(question.question_id(), question.title(), question.description(), LocalDateTime.now(), question.user_id(), question.answerCount());
             }
         }
         return null;
