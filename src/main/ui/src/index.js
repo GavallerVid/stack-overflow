@@ -27,7 +27,7 @@ const router = createBrowserRouter([
                 path: "/questions/:id",
                 element: <GetQuestion />,
             },
-
+            {
                 path: "/users/add",
                 element: <RegisterUserForm/>,
             },
