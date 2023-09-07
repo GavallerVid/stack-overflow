@@ -13,7 +13,7 @@ export default function RegisterUserForm() {
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
             </div>
-            <button onClick={} type="submit" className="btn btn-primary">Register</button>
+            <button type="submit" className="btn btn-primary">Register</button>
         </Form>
     )
 }

@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import HomePage from "./HomePage";
 import LoginButtons from "./Components/LoginButtons";
 import RegisterUserForm from "./Components/RegisterUserForm";
+import LoginPage from "./Pages/LoginPage";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/users/add",
                 element: <RegisterUserForm/>,
+            },
+            {
+                path:"/users/login",
+                element: <LoginPage/>,
             },
         ]
     }

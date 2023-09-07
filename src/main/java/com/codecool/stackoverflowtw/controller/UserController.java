@@ -25,9 +25,9 @@ import java.util.List;
             return usersService.getAllUsers();
         }
 
-        @GetMapping("/{id}")
-        public UserDTO getUserById(@PathVariable int id) {
-            return usersService.getUserById(id);
+        @GetMapping("/{user_name}")
+        public UserDTO getUserByName(@PathVariable String user_name) {
+            return usersService.getUserByName(user_name);
         }
 
         @PostMapping("/")
@@ -35,8 +35,8 @@ import java.util.List;
             return usersService.addNewUser(newUserDTO.username(),newUserDTO.password());
         }
 
-        @DeleteMapping("/{id}")
-        public boolean deleteUserById(@PathVariable int id) {
+        @DeleteMapping("/{user_name}")
+        public boolean deleteUserById(@PathVariable String user_name) {
             return false;
         }
 }
