@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    private QuestionsDAO questionsDAO;
+    private final QuestionsDAO questionsDAO;
 
     @Autowired
     public QuestionService(QuestionsDAO questionsDAO) {
@@ -23,9 +23,9 @@ public class QuestionService {
 
     public List<QuestionDTO> getAllQuestions() {
         List<QuestionDTO> questionDTOS = new ArrayList<>();
-        List<Question> questionsFromDB = questionsDAO.getAllQuestions();
+        List<Question> questionsFromDB = questionsDAO.getAllQuestionsWithAnswerCount();
 
-        questionsFromDB.forEach((question -> questionDTOS.add(new QuestionDTO(question.question_id(), question.title(), question.description(), LocalDateTime.now(), question.user_id()))));
+        questionsFromDB.forEach((question -> questionDTOS.add(new QuestionDTO(question.question_id(), question.title(), question.description(), LocalDateTime.now(), question.user_id(), question.answerCount()))));
 
 
         return questionDTOS;
@@ -33,10 +33,10 @@ public class QuestionService {
 
     public QuestionDTO getQuestionById(int id) {
 
-        List<Question> questionsFromDB = questionsDAO.getAllQuestions();
+        List<Question> questionsFromDB = questionsDAO.getAllQuestionsWithAnswerCount();
         for (Question question : questionsFromDB) {
             if (question.question_id() == id) {
-                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now(), question.user_id());
+                return new QuestionDTO(question.question_id(), "title", question.description(), LocalDateTime.now(), question.user_id(), question.answerCount());
             }
         }
         return null;
