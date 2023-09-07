@@ -6,6 +6,7 @@ export default function NewQuestionForm() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const loggedInUserId = JSON.parse(localStorage.getItem("user")).id
 
     const handleQuestionTitleChange = (event) => {
         setTitle(event.target.value)
@@ -16,14 +17,16 @@ export default function NewQuestionForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(title + " " +description)
-        const newQuestion = {questionTitle: description}
+        const newQuestion = {
+            title: title,
+            description: description, user_id: loggedInUserId}
         postQuestion(newQuestion)
     }
     async function postQuestion (newQuestion) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({newQuestion})
+            body: JSON.stringify(newQuestion)
         };
         fetch('/questions/', requestOptions)
             .then(response => response.json())
