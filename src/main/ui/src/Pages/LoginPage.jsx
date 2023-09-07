@@ -3,39 +3,31 @@ import React, {useEffect, useState} from 'react';
 import Loading from "../Components/Loading";
 import {useNavigate, useSubmit} from "react-router-dom";
 import Layout from "../Layout";
+import {useUser} from "../Components/UserContext";
 
+//url should not contain the passowrd but it's okay for now
 function fetchUser(username,password){
     return  fetch("/users/"+username+"+"+password).then((res) => res.json());
 }
 export default function LoginPage() {
-
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
-    const [user_id, setUser_id] = useState(null);
+    const {handleLogin} = useUser();
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
 
 
-
-
-    useEffect(() => {
-        fetchUser(username).then((user) => {
-            setLoading(false);
-            setUser(user);
-
-        });
-    }, []);
-
     if (loading) {
         return <Loading />
     }
+
     function handleLoginCLick(){
+        setLoading(true)
         fetchUser(username,password).then((user) => {
             setLoading(false);
-            setUser(user);
-            setUser_id(user.id)
-            console.log(user);
+            handleLogin(user)
+            navigate('/')
         });
         if (loading) {
             return <Loading />
