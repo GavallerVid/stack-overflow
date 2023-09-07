@@ -25,9 +25,9 @@ import java.util.List;
             return usersService.getAllUsers();
         }
 
-        @GetMapping("/{user_name}")
-        public UserDTO getUserByName(@PathVariable String user_name) {
-            return usersService.getUserByName(user_name);
+        @GetMapping("/{user_name}+{password}")
+        public UserDTO getUserByName(@PathVariable String user_name, @PathVariable String password) {
+            return usersService.getUserByName(user_name, password);
         }
 
         @PostMapping("/")

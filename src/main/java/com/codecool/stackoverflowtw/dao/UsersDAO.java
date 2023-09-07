@@ -10,6 +10,6 @@ public interface UsersDAO {
     public int addUser(newUserDTO newUserDTO);
     public List<User> getAllUsers();
 
-    public UserDTO getUserByName(String user_name);
+    public UserDTO getUserByName(String user_name,String password);
     public boolean deleteUsersById(int id);
 }

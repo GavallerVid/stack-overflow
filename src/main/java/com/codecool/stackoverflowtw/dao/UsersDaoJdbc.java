@@ -66,8 +66,8 @@ public class UsersDaoJdbc implements UsersDAO {
     }
 
     @Override
-    public UserDTO getUserByName(String user_name) {
-        String sql = "SELECT * FROM users WHERE user_name = ?";
+    public UserDTO getUserByName(String user_name, String pass) {
+        String sql = "SELECT * FROM users WHERE user_name = ? AND password = ?";
         int user_id = 0;
         String username = "";
         String password = "";
@@ -75,6 +75,7 @@ public class UsersDaoJdbc implements UsersDAO {
             Connection connection = psqlConnect.connect();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user_name);
+            statement.setString(2, pass);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 user_id = rs.getInt("user_id");

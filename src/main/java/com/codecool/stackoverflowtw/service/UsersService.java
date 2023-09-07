@@ -26,8 +26,8 @@ public class UsersService {
         }
         return userDTOS;
     }
-    public UserDTO getUserByName(String user_name) {
-        UserDTO user = usersDaoJdbc.getUserByName(user_name);
+    public UserDTO getUserByName(String user_name, String password) {
+        UserDTO user = usersDaoJdbc.getUserByName(user_name, password);
 
         return user;
     }
