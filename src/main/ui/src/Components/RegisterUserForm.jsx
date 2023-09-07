@@ -68,7 +68,7 @@ export default function RegisterUserForm() {
                 <div>
                 Welcome {userName} on the page! Successful registration.
                 </div>
-                <button onClick={() => navigate('/uses/login')}>Login</button>
+                <button onClick={() => navigate('/users/login')}>Login</button>
                 <button onClick={() => navigate('/')}>Return to homepage</button>
             </div>
         )

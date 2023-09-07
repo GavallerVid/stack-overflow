@@ -5,11 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Layout from "./Layout";
 import HomePage from "./HomePage";
-import LoginButtons from "./Components/LoginButtons";
-import RegisterUserForm from "./Components/RegisterUserForm";
 import LoginPage from "./Pages/LoginPage";
 
-import LoginButtons from "./Components/LoginButtons";
 import RegisterUserForm from "./Components/RegisterUserForm";
 
 import NewQuestionForm from "./Components/NewQuestionForm";
