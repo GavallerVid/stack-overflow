@@ -13,6 +13,7 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterUserForm from "./Components/RegisterUserForm";
 
 import NewQuestionForm from "./Components/NewQuestionForm";
+import UserProvider from "./Components/UserContext";
 
 const router = createBrowserRouter([
     {
@@ -47,7 +48,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+      <UserProvider>
+          <RouterProvider router={router}/>
+      </UserProvider>
   </React.StrictMode>
 );
 

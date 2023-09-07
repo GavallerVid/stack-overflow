@@ -1,30 +1,36 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function NewQuestionForm() {
+    const navigate = useNavigate()
 
-    const [questionTitle, setQuestionTitle] = useState("");
-    const [questionDescription, setQuestionDescription] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const loggedInUserId = JSON.parse(localStorage.getItem("user")).id
+
     const handleQuestionTitleChange = (event) => {
-        setQuestionTitle(event.target.value)
+        setTitle(event.target.value)
     }
     const handleQuestionDescriptionChange = (event) => {
-        setQuestionDescription(event.target.value)
+        setDescription(event.target.value)
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(questionTitle + " " +questionDescription)
-        const newQuestion = {questionTitle: questionDescription}
+        console.log(title + " " +description)
+        const newQuestion = {
+            title: title,
+            description: description, user_id: loggedInUserId}
         postQuestion(newQuestion)
     }
     async function postQuestion (newQuestion) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({newQuestion})
+            body: JSON.stringify(newQuestion)
         };
         fetch('/questions/', requestOptions)
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(navigate('/'));
     }
 
     return (
@@ -32,12 +38,12 @@ export default function NewQuestionForm() {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="question-title">Question Title:</label>
                 <input type="text" id={"questionTitle"} name={"questionTitle"}
-                       defaultValue={questionTitle} onChange={handleQuestionTitleChange}/>
+                       defaultValue={title} onChange={handleQuestionTitleChange}/>
                 <label htmlFor="question-description">Question:</label>
                 <input type="text" id={"questionDescription"} name={"questionDescription"}
-                       defaultValue={questionDescription}
+                       defaultValue={description}
                        onChange={handleQuestionDescriptionChange}/>
-                <input type={"submit"}/>
+                <button type={"submit"}>Submit</button>
             </form>
         </div>
     )
