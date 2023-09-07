@@ -7,7 +7,7 @@ export default function QuestionsTable({ questions }) {
             <thead>
             <tr>
                 <th>Question title</th>
-                <th>Description</th>
+                <th>Answers</th>
                 <th>Date</th>
             </tr>
             </thead>
@@ -15,8 +15,8 @@ export default function QuestionsTable({ questions }) {
                 {questions.map((question) => (
                     <tr key={question.id}>
                         <td>{question.title}</td>
-                        <td>{question.description}</td>
-                        <td>{question.created.substring(0, 10)}</td>
+                        <td>{question.answerCount}</td>
+                        <td>{question.created.substring(0, 10) + " " + question.created.substring(11, 16)}</td>
                     </tr>
                 ))}
             </tbody>
