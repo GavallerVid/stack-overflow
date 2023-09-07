@@ -27,17 +27,17 @@ public class UsersService {
         return userDTOS;
     }
     public UserDTO getUserById(int id) {
-        // TODO
+        UserDTO user = usersDaoJdbc.getUserById(id);
 
-        return new UserDTO(id, "example user", "example pw");
+        return user;
     }
     public boolean deleteUsersById(int id) {
         // TODO
         return false;
     }
-    public int addNewUser(int id, String user_name, String password) {
-        usersDaoJdbc.addUser(new UserDTO(id, user_name, password));
-        int createdId = id;
-        return createdId;
+    public int addNewUser(String user_name, String password) {
+        newUserDTO user = new newUserDTO(user_name, password);
+        return usersDaoJdbc.addUser(user);
+        //return user.id();
     }
 }

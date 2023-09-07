@@ -25,12 +25,8 @@ public class QuestionService {
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         List<Question> questionsFromDB = questionsDAO.getAllQuestions();
 
-        for (Question question : questionsFromDB) {
-            int id = question.question_id();
-            String description = question.description();
-            int user_id = question.user_id();
-            questionDTOS.add(new QuestionDTO(id, "title", description, LocalDateTime.now(), user_id));
-        }
+        questionsFromDB.forEach((question -> questionDTOS.add(new QuestionDTO(question.question_id(), question.title(), question.description(), LocalDateTime.now(), question.user_id()))));
+
 
         return questionDTOS;
     }
@@ -53,8 +49,6 @@ public class QuestionService {
     }
 
     public int addNewQuestion(NewQuestionDTO question) {
-        // TODO
-        int createdId = 0;
-        return createdId;
+        return questionsDAO.addQuestion(question);
     }
 }

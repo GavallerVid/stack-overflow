@@ -1,8 +1,6 @@
 package com.codecool.stackoverflowtw.dao;
 
 
-import com.codecool.stackoverflowtw.controller.dto.QuestionDTO;
-
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 
 import com.codecool.stackoverflowtw.dao.model.Question;
@@ -39,10 +37,11 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
             while (rs.next()) {
                 int question_id = rs.getInt("question_id");
+                String title = rs.getString("title");
                 String description = rs.getString("description");
                 int user_id = rs.getInt("user_id");
 
-                questions.add(new Question(question_id, description, user_id));
+                questions.add(new Question(question_id, title, description, user_id));
 
                 System.out.printf("QID: %d, Description: %s, UID: %d", question_id, description, user_id);
 
@@ -61,20 +60,24 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     }
 
     @Override
-    public boolean addQuestion(QuestionDTO questionDTO) {
-        String sql = "INSERT INTO questions(description ,user_id) VALUES (?,?)";
+    public int addQuestion(NewQuestionDTO newQuestionDTO) {
+        String sql = "INSERT INTO questions(title, description ,user_id) VALUES (?,?,?)";
         Connection connection = psqlConnect.connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, questionDTO.description());
-            preparedStatement.setInt(2, questionDTO.user_id());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, newQuestionDTO.title());
+            preparedStatement.setString(2, newQuestionDTO.description());
+            preparedStatement.setInt(3, newQuestionDTO.user_id());
             preparedStatement.executeUpdate();
             System.out.println("question added");
-            return true;
-        } catch (SQLException e){
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return 0;
     }
 
 
@@ -97,5 +100,5 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
         return affectedrows;
     }
 
-   
+
 }

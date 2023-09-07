@@ -12,7 +12,7 @@ class UsersServiceTest {
         PSQLConnect connect = new PSQLConnect();
         UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc(connect);
         UsersService usersService = new UsersService(usersDaoJdbc);
-        assertEquals(2, usersService.addNewUser(2,"Neo", "fsdf"));
+        assertEquals(2, usersService.addNewUser("Neo", "fsdf"));
     }
 
 }

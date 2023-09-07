@@ -27,12 +27,12 @@ import java.util.List;
 
         @GetMapping("/{id}")
         public UserDTO getUserById(@PathVariable int id) {
-            return null;
+            return usersService.getUserById(id);
         }
 
         @PostMapping("/")
-        public int addNewUser(@RequestBody newUserDTO question) {
-            return 0;
+        public int addNewUser(@RequestBody newUserDTO newUserDTO) {
+            return usersService.addNewUser(newUserDTO.username(),newUserDTO.password());
         }
 
         @DeleteMapping("/{id}")
