@@ -6,7 +6,8 @@ export default function NewQuestionForm() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const loggedInUserId = JSON.parse(localStorage.getItem("user")).id
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    const loggedInUserId = loggedInUser ? loggedInUser.id : null;
 
     const handleQuestionTitleChange = (event) => {
         setTitle(event.target.value)
@@ -35,16 +36,20 @@ export default function NewQuestionForm() {
 
     return (
         <div id={"formContainer"}>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="question-title">Question Title:</label>
-                <input type="text" id={"questionTitle"} name={"questionTitle"}
-                       defaultValue={title} onChange={handleQuestionTitleChange}/>
-                <label htmlFor="question-description">Question:</label>
-                <input type="text" id={"questionDescription"} name={"questionDescription"}
-                       defaultValue={description}
-                       onChange={handleQuestionDescriptionChange}/>
-                <button type={"submit"}>Submit</button>
-            </form>
+            {loggedInUser ? (
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="question-title">Question Title:</label>
+                    <input type="text" id={"questionTitle"} name={"questionTitle"}
+                           defaultValue={title} onChange={handleQuestionTitleChange}/>
+                    <label htmlFor="question-description">Question:</label>
+                    <input type="text" id={"questionDescription"} name={"questionDescription"}
+                           defaultValue={description}
+                           onChange={handleQuestionDescriptionChange}/>
+                    <button type={"submit"}>Submit</button>
+                </form>
+            ) : (
+                <div>Please register first.</div>
+            )}
         </div>
-    )
+    );
 }
