@@ -6,6 +6,7 @@ export default function NewQuestionForm() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+
     const handleQuestionTitleChange = (event) => {
         setTitle(event.target.value)
     }

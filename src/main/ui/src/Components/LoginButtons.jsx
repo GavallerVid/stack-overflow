@@ -16,8 +16,13 @@ export default function LoginButtons() {
 
     return (
         <div id="user">
-            <button onClick={registerNavigate}>Register</button>
-            <button onClick={()=>navigate("/users/login")}>Login</button>
+            {localStorage.getItem("user") ? <div>
+                logged in
+            </div> :
+                <div>
+                    <button onClick={registerNavigate}>Register</button>
+                    <button onClick={()=>navigate("/users/login")}>Login</button>
+                </div>}
         </div>
     )
 }

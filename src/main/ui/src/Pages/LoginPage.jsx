@@ -5,9 +5,9 @@ import {useNavigate, useSubmit} from "react-router-dom";
 import Layout from "../Layout";
 import {useUser} from "../Components/UserContext";
 
-//url should not contain the passowrd but it's okay for now
+//url should not contain the password, but it's okay for now
 function fetchUser(username,password){
-    return  fetch("/users/"+username+"+"+password).then((res) => res.json());
+    return fetch("/users/"+username+"+"+password).then((res) => res.json());
 }
 export default function LoginPage() {
     const {handleLogin} = useUser();
@@ -15,8 +15,6 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-
 
     if (loading) {
         return <Loading />
