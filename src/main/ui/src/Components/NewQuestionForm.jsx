@@ -57,7 +57,7 @@ export default function NewQuestionForm() {
                     </Form>
                 </div>
             ) : (
-                <div>Please register first.</div>
+                <p className="text-center text-uppercase fs-3 py-5">Login or register to ask questions</p>
             )}
         </div>
     )
