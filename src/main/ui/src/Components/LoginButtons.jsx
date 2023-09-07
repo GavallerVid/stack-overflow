@@ -22,7 +22,7 @@ export default function LoginButtons() {
     return (
         <div id="user">
             {localStorage.getItem("user") ? <div>
-                Logged in: {JSON.parse(localStorage.getItem("user")).user_name}
+                    <text className= "text-light-emphasis">Logged in: {JSON.parse(localStorage.getItem("user")).user_name} </text>
                     <button onClick={logout}>Logout</button>
             </div> :
                 <div>
