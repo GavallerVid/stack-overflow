@@ -6,6 +6,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Layout from "./Layout";
 import HomePage from "./HomePage";
 import LoginButtons from "./Components/LoginButtons";
+import RegisterUserForm from "./Components/RegisterUserForm";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/users/add",
-                element: ,
+                element: <RegisterUserForm/>,
             },
         ]
     }
