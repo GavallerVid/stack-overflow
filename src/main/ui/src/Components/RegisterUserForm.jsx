@@ -1,4 +1,4 @@
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -64,12 +64,10 @@ export default function RegisterUserForm() {
         )
     } else {
         return (
-            <div>
-                <div>
-                Welcome {userName} on the page! Successful registration.
-                </div>
-                <button onClick={() => navigate('/users/login')}>Login</button>
-                <button onClick={() => navigate('/')}>Return to homepage</button>
+            <div className='p-5 text-center bg-light'>
+                <h4 className='mb-3'>Welcome {userName} on the page! Successful registration.</h4>
+                <Button className='mx-1 btn btn-primary' onClick={() => navigate('/users/login')}>Login</Button>
+                <Button className='mx-1 btn btn-primary' onClick={() => navigate('/')}>Return to homepage</Button>
             </div>
         )
     }
