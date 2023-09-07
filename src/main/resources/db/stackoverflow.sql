@@ -30,3 +30,4 @@ CREATE TABLE answers
     foreign key (user_id)
         references users (user_id)
 );
+
