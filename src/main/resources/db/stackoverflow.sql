@@ -15,8 +15,11 @@ CREATE TABLE questions
     title text,
     description text,
     user_id serial NOT NULL,
+    answer_id serial NOT NULL,
     foreign key (user_id)
-        references users (user_id)
+        references users (user_id),
+    foreign key (answer_id)
+        references answers (answer_id)
 );
 
 CREATE TABLE answers
