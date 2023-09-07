@@ -1,0 +1,14 @@
+.questionConatiner {
+    margin-top: 1rem;
+    margin-left: 15rem;
+    margin-right: 15rem;
+}
+.question {
+    text-align: center;
+}
+
+.button {
+    margin-left: 27rem;
+    margin-right: 27rem;
+    margin-bottom: 1rem;
+}
