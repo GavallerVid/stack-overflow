@@ -44,19 +44,22 @@ export default function RegisterUserForm() {
     if (!registered) {
         return (
             <Form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="position-absolute top-50 start-50 translate-middle">
+                <div className="mb-3">
                     <label htmlFor="username">Username</label>
                     <input required={true} onChange={handleUsernameInput} type="username" className="form-control" id="username"
                            aria-describedby="emailHelp"
                            placeholder="Enter username"/>
                     <small id="usernameHelp" className="form-text text-muted">Think about a unique username</small>
                 </div>
-                <div className="form-group">
+                <div className="mb-3">
                     <label htmlFor="exampleInputPassword1">Password</label>
                     <input required={true} onChange={handlePasswordInput} type="password" className="form-control"
                            id="exampleInputPassword1" placeholder="Password"/>
+                    <small id="usernameHelp" className="form-text text-muted">Dont ever let anyone find out your password fam</small>
                 </div>
-                <button type="submit" className="btn btn-primary">Register</button>
+                <button type="submit" className="btn btn-secondary btn-lg">Register</button>
+                </div>
             </Form>
         )
     } else {
