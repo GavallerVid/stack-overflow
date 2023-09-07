@@ -14,10 +14,16 @@ export default function LoginButtons() {
         }
     }
 
+    function logout () {
+        localStorage.clear();
+        window.location.reload();
+    }
+
     return (
         <div id="user">
             {localStorage.getItem("user") ? <div>
-                logged in
+                Logged in: {JSON.parse(localStorage.getItem("user")).user_name}
+                    <button onClick={logout}>Logout</button>
             </div> :
                 <div>
                     <button onClick={registerNavigate}>Register</button>
