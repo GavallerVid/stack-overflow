@@ -17,7 +17,7 @@ export default function LoginButtons() {
     return (
         <div id="user">
             <button onClick={registerNavigate}>Register</button>
-            <button>Login</button>
+            <button onClick={()=>navigate("/users/login")}>Login</button>
         </div>
     )
 }

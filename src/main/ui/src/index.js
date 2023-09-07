@@ -5,8 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Layout from "./Layout";
 import HomePage from "./HomePage";
-import LoginButtons from "./Components/LoginButtons";
+import LoginPage from "./Pages/LoginPage";
+
 import RegisterUserForm from "./Components/RegisterUserForm";
+
 import NewQuestionForm from "./Components/NewQuestionForm";
 
 const router = createBrowserRouter([
@@ -21,6 +23,11 @@ const router = createBrowserRouter([
             {
                 path: "/users/add",
                 element: <RegisterUserForm/>,
+            },
+            {
+
+                path:"/users/login",
+                element: <LoginPage/>,
             },
             {
                 path: "/add-new-question",
