@@ -11,39 +11,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsDaoJdbc implements QuestionsDAO {
-    private PSQLConnect psqlConnect;
+    private final PSQLConnect psqlConnect;
 
     public QuestionsDaoJdbc(PSQLConnect psqlConnect) {
         this.psqlConnect = psqlConnect;
     }
 
     @Override
-    public void sayHi() {
-        System.out.println("Hi DAO!");
-    }
-
-    @Override
-    public List<Question> getAllQuestions() {
+    public List<Question> getAllQuestionsWithAnswerCount() {
         List<Question> questions = new ArrayList<>();
-        String sql = "SELECT * FROM questions";
-        Connection conn = null;
-        Statement statement = null;
-        try {
-            conn = psqlConnect.connect();
-            System.out.println("Connected...");
+        String sql = "SELECT *, COUNT(a.answer_id) FROM questions q " +
+        "LEFT JOIN answers a ON a.question_id = q.question_id " +
+        "GROUP BY q.question_id, a.answer_id";
 
-            statement = conn.createStatement();
+        try {
+            Connection conn = psqlConnect.connect();
+            Statement statement = conn.createStatement();
+
             ResultSet rs = statement.executeQuery(sql);
 
-            while (rs.next()) {
+            while(rs.next()) {
                 int question_id = rs.getInt("question_id");
                 String title = rs.getString("title");
                 String description = rs.getString("description");
                 int user_id = rs.getInt("user_id");
+                int answerCount = rs.getInt("count");
 
-                questions.add(new Question(question_id, title, description, user_id));
+                questions.add(new Question(question_id, title, description, user_id, answerCount));
 
-                System.out.printf("QID: %d, Description: %s, UID: %d", question_id, description, user_id);
+                System.out.printf("QID: %d, Title: %s, Description: %s, UID: %d, answers: %d", question_id, title, description, user_id, answerCount);
 
                 System.out.println();
             }
