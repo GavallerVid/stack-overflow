@@ -13,6 +13,18 @@ export default function NewQuestionForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(questionTitle + " " +questionDescription)
+        const newQuestion = {questionTitle: questionDescription}
+        postQuestion(newQuestion)
+    }
+    async function postQuestion (newQuestion) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({newQuestion})
+        };
+        fetch('/questions/', requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data));
     }
 
     return (
