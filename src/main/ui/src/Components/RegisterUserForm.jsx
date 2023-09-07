@@ -12,7 +12,6 @@ export default function RegisterUserForm() {
         setPassword(event.target.value)
     }
 
-
     async function registerUser (enteredUsername, enteredPassword) {
         const body = {
             username : enteredUsername,
