@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS answers CASCADE;
 CREATE TABLE users
 (
     user_id             serial primary key,
-    user_name           character varying(15) NOT NULL,
+    user_name           character varying(35) UNIQUE NOT NULL,
     password           character varying(45) NOT NULL
 );
 
